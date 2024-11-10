@@ -8,8 +8,8 @@ class ContactRequest(BaseModel):
     last_name: str = Field(max_length=150)
     email: EmailStr
     phone: str = Field(max_length=20)
-    birthday: Optional[str] = Field(max_length=10)
-    info: Optional[str] = Field(max_length=500)
+    birthday: Optional[str] = Field(max_length=10, default="")
+    info: Optional[str] = Field(max_length=500, default='')
 
     @field_validator("birthday", mode="after")
     def validate_birthday(cls, value):

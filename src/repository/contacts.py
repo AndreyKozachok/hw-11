@@ -17,8 +17,11 @@ from datetime import datetime
 
 
 async def create_contact(body: ContactRequest, db: Session) -> Contact:
-    birthday_dt = datetime.strptime(body.birthday, "%d.%m.%Y")
-    contact = Contact(name=body.name, last_name=body.last_name, email=body.email, phone=body.phone, info=body.info)
+    if body.birthday == '':
+        contact = Contact(name=body.name, last_name=body.last_name, email=body.email, phone=body.phone, info=body.info)
+    else:
+        contact = Contact(name=body.name, last_name=body.last_name, email=body.email, phone=body.phone, info=body.info,
+                          birthday=body.birthday)
     db.add(contact)
     db.commit()
     db.refresh(contact)

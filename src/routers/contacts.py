@@ -24,7 +24,7 @@ router = APIRouter(prefix='/contacts', tags=["contacts"])
 #     return tag
 
 
-@router.post("/")
+@router.post("/", response_model=ContactResponse)
 async def create_contact(body: ContactRequest, db: Session = Depends(get_db)):
     return await repository_contacts.create_contact(body, db)
 
